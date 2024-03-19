@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CssBaseline, ThemeProvider, Grid, Box } from "@mui/material";
+import { CssBaseline, ThemeProvider, Grid, Box, Alert } from "@mui/material";
 import UserList from "./components/UserList";
 import NewUser from "./components/NewUser";
 import { customTheme } from "./theme/customTheme";
@@ -36,15 +36,17 @@ export default function App() {
         <Grid
           item
           display="flex"
-          flexDirection="row"
-          justifyContent="space-around"
-          alignItems="center"
-          md={10}
-          xs={12}
-          mb={8}
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="sapce-around"
+          width="100%"
         >
           <NewUser onAddUser={handleAddUser} />
-        
+          {Array.isArray(users) && users.length === 0 && (
+            <Alert severity="warning">
+              Please start by creating some users
+            </Alert>
+          )}
           <UserList users={users} onDeleteUser={handleDeleteUser} />
         </Grid>
       </Grid>
