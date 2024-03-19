@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
-import UserList from './components/UserList';
-import NewUser from './components/NewUser';
-import './App.css';
+import { useState } from "react";
+import { CssBaseline, ThemeProvider, Grid, Box } from "@mui/material";
+import UserList from "./components/UserList";
+import NewUser from "./components/NewUser";
+import { customTheme } from "./theme/customTheme";
+import "./App.css";
 
 export type User = {
   name: string;
@@ -29,11 +30,24 @@ export default function App() {
   }
 
   return (
-    <div>  
-          
-      <NewUser onAddUser={handleAddUser}/>
-      <UserList users={users} onDeleteUser={handleDeleteUser} />
-     
-    </div>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <Grid container minHeight="100vh" p={0} m={0}>
+        <Grid
+          item
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+          md={10}
+          xs={12}
+          mb={8}
+        >
+          <NewUser onAddUser={handleAddUser} />
+        
+          <UserList users={users} onDeleteUser={handleDeleteUser} />
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 }
